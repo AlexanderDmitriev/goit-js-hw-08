@@ -15,6 +15,7 @@
 // Add imports above this line
 import { galleryItems } from './gallery-items';
 import SimpleLightbox from "simplelightbox";
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 // Change code below this line
 
@@ -38,15 +39,7 @@ href.galleryList.insertAdjacentHTML('afterBegin', imageFromGallery);
 let lightbox = new SimpleLightbox('.gallery a', {
   animationSpeed: 500,
   fadeSpeed: 500,
-  captions: true,
-  captionType: 'attr',
-  //sourceAttr: 'data-source',
   captionsData: 'alt',
-  captionPosition: 'bottom',
-   captionDelay: 250,
+  captionDelay: 250,
   
 });
-lightbox.on('shown.simplelightbox', () => {
-   lightbox.next();
-   console.log(lightbox);
-}); 
