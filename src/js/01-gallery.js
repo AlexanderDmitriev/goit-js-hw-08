@@ -15,6 +15,7 @@
 // Add imports above this line
 import { galleryItems } from './gallery-items';
 import SimpleLightbox from "simplelightbox";
+
 // Change code below this line
 
 const href = {
@@ -39,11 +40,13 @@ let lightbox = new SimpleLightbox('.gallery a', {
   fadeSpeed: 500,
   captions: true,
   captionType: 'attr',
+  //sourceAttr: 'data-source',
   captionsData: 'alt',
   captionPosition: 'bottom',
-  captionDelay: 250,
+   captionDelay: 250,
+  
 });
-
-lightbox.on(() => {
-  lightbox.next();
-});
+lightbox.on('shown.simplelightbox', () => {
+   lightbox.next();
+   console.log(lightbox);
+}); 
