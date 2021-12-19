@@ -25,3 +25,41 @@
 с сохраненной позиции.
 7. Добавь в проект бибилотеку lodash.throttle и сделай так, чтобы время воспроизведения обновлялось в хранилище не чаще чем раз в секунду.
  */
+
+//import Player from '@vimeo/player';
+
+const iframe = document.querySelector('iframe');
+const player = new Vimeo.Player(iframe);
+
+let timing;
+let continueTime;
+
+player.on('timeupdate', function (event) {
+        timing = event.seconds;
+        localStorage.setItem("videoplayer-current-time", timing);
+    });
+
+    player.getVideoTitle().then(function(title) {
+        console.log('title:', title);
+    });
+
+    try {
+      continueTime = JSON.parse(localStorage.getItem("videoplayer-current-time"));
+      console.log(continueTime);
+    } catch (error) {
+      console.log(error);
+}
+    
+ player.setCurrentTime(continueTime).then(function(seconds) {
+    // seconds = the actual time that the player seeked to
+ }).catch(function(error) {
+    switch (error.name) {
+        case 'RangeError':
+            // the time was less than 0 or greater than the video’s duration
+            break;
+
+        default:
+            // some other error occurred
+            break;
+    }
+}); 
