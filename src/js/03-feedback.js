@@ -28,7 +28,8 @@
 const refs = {
     emailInput: document.querySelector('.feedback-form').firstElementChild.children[0],
     messageInput: document.querySelector('.feedback-form ').children[1].children[0],
-    formInput:document.querySelector('.feedback-form ')
+    formInput: document.querySelector('.feedback-form '),
+    submitButton:document.querySelector('.feedback-form button'),
 }
 
 const formData = {
@@ -39,7 +40,7 @@ let previousFormData;
 
  try {
     previousFormData = JSON.parse(localStorage.getItem("feedback-form-state"));
-    console.log(previousFormData);
+    //console.log(previousFormData);
 } catch (error) {
     console.log(error);
 }
@@ -52,9 +53,15 @@ const formInputHandler = (event) => {
     formData.inputData = refs.emailInput.value;
     formData.messageData = refs.messageInput.value;
     localStorage.setItem("feedback-form-state", JSON.stringify(formData));
-    console.log(formData.inputData);
-    console.log(formData.messageData);
 }
 
+const submitHandler = (event) => {
+    event.preventDefault();
+    console.log("inputData: " + previousFormData.inputData);
+    console.log("messageData: " + previousFormData.messageData);
+    event.currentTarget.reset();
+ }
+
 refs.formInput.addEventListener('input', formInputHandler);
-//console.log(refs.formInput);
+refs.formInput.addEventListener("submit", submitHandler);
+
